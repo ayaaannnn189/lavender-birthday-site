@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Bestie 💛</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- CINEMATIC INTRO -->
+<div id="cinematicIntro">
+
+    <div class="introGlow"></div>
+    <div class="introNebula"></div>
+    <div class="introFade"></div>
+
+    <div class="introText">
+
+<div class="introLine line1">Birthdays are meant to be memorable...</div>
+
+<div class="introLine line2">So I made something special for you.</div>
+
+<div class="introLine line3">
+Ready? <span class="introHeart">💜</span>
+</div>
+
+</div>
+</div>
+
+<div class="decorations">
+    <div class="heart h1"></div>
+    <div class="heart h2"></div>
+</div>
+
+<div class="card">
+
+    <div id="intro">
+        <h1>Hey fifuu 🤍</h1>
+        <p>Happiest birthday, I hope you like my small little gift :)</p>
+        <button id="openBtn">Open My Heart ✨</button>
+    </div>
+
+    <div id="letter" class="hidden">
+        <div class="paper">
+            <p class="topLeft" id="greeting"></p>
+            <div class="centerMessage">
+                <p id="message"></p>
+            </div>
+            <p class="bottomRight" id="signature"></p>
+            <button id="playlistBtn">A little surprise for you 💜</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- PLAYLIST PAGE -->
+<div id="playlistPage" class="playlistPage">
+
+    <div class="playlistHearts">
+        <div class="pheart"></div>
+        <div class="pheart"></div>
+        <div class="pheart"></div>
+        <div class="pheart"></div>
+        <div class="pheart"></div>
+    </div>
+
+    <div class="playlistTitle">
+        A dedicated playlist just for you ✨
+    </div>
+
+    <div class="playlistCard" id="playlistCard">
+
+        <h2 id="mood">Full of Joy</h2>
+
+        <div class="albumImageWrapper">
+            <img id="albumImage" src="images/dynamite.jpg" alt="Album Cover">
+        </div>
+
+        <h1 id="song">Dynamite</h1>
+        <p id="desc">Bright, bubbly happiness 💜</p>
+
+        <audio id="audio" controls></audio>
+
+        <div class="navArrow leftNav">❮</div>
+        <div class="navArrow rightNav">❯</div>
+
+    </div>
+
+</div>
+
+<!-- FINAL PAGE -->
+
+<!-- NIGHT TRANSITION -->
+<div class="nightLoader" id="nightLoader">
+    <div class="nightGlow">✨</div>
+    <p class="nightText">You deserve a sky full of beautiful things... 🌙</p>
+</div>
+
+<!-- FINAL PAGE -->
+<div id="finalPage" class="finalPage">
+
+<div class="moonContainer">
+
+<div class="moonflower" id="moonflower">
+
+<div class="moonHalo"></div>
+
+<div class="petal p1"></div>
+<div class="petal p2"></div>
+<div class="petal p3"></div>
+<div class="petal p4"></div>
+<div class="petal p5"></div>
+<div class="petal p6"></div>
+<div class="petal p7"></div>
+<div class="petal p8"></div>
+
+<div class="flowerCore"></div>
+<div class="stardustRipple"></div>
+
+</div>
+
+<div class="bloomMessage">
+
+<p>
+Every bloom carries a story within it.<br>
+This one blossoms just for you.
+</p>
+
+<p class="bloomSub">
+Out of the countless shining stars in the universe,<br>
+you are the one I adore the most 🫶.
+</p>
+
+<a href="YOUR_POSTCARD_LINK" class="postcardLink" target="_blank">
+A message from the bottom of my heart 💌
+</a>
+
+</div>
+
+
+
+<div class="stardust"></div>
+<div class="stardust2"></div>
+
+<canvas id="starCanvas"></canvas>
+<canvas id="textCanvas" style="display:none;"></canvas>
+</div>
+
+</div>
+
+</div>
+
+<!-- MAGIC HEART TRANSITION -->
+<div class="magicLoader" id="magicLoader">
+    <div class="magicHeart"></div>
+    <p class="magicText">Almost there cutie...</p>
+</div>
+
+<audio id="piano" loop>
+    <source src="audio/piano.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="bloomSound">
+    <source src="audio/bloom.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="starSound">
+    <source src="audio/sparkle.mp3" type="audio/mpeg">
+</audio>
+<script>
+
+
+/* ================= CINEMATIC INTRO ================= */
+
+const introBox = document.getElementById("cinematicIntro");
+const introHeart = document.querySelector(".introHeart");
+
+window.addEventListener("load", () => {
+
+   
+
+    /* fade intro away */
+
+    setTimeout(()=>{
+        introBox.classList.add("fadeOut");
+    },7800);
+
+});
+/* ================= ORIGINAL SCRIPT (UNCHANGED) ================= */
+
+const openBtn = document.getElementById("openBtn");
+const intro = document.getElementById("intro");
+const letter = document.getElementById("letter");
+const paper = document.querySelector(".paper");
+const piano = document.getElementById("piano");
+piano.volume = 0;
+
+const greetingEl = document.getElementById("greeting");
+const messageEl = document.getElementById("message");
+const signatureEl = document.getElementById("signature");
+const playlistBtn = document.getElementById("playlistBtn");
+const playlistCard = document.getElementById("playlistCard");
+const albumImage = document.getElementById("albumImage");
+const songPlayer = document.getElementById("audio");
+
+const magicLoader = document.getElementById("magicLoader");
+const playlistPage = document.getElementById("playlistPage");
+
+const greetingText = "My dearest Afifa, 🌸";
+const messageText = "Every moment with you is etched among the happiest memories of mine. Your presence is one of the most precious things to me. You bring warmth, comfort, and a lot — a lot — of smiles. You have no idea how much I adore you, and I’m truly grateful to have you in my life, with whom every moment feels special.";
+const signatureText = "With all my love, Ayaan ✨";
+
+const songs = [
+    {
+        mood: "Full of Joy",
+        song: "Dynamite",
+        desc: "Bright, bubbly happiness 💜",
+        file: "songs/Dynamite.mp3",
+        image: "images/dynamitejoy.jpeg",
+        glow1: "rgba(186, 147, 255, 0.75)",
+        glow2: "rgba(147, 112, 219, 0.60)"
+    },
+    {
+        mood: "Inner Strength",
+        song: "Battle Symphony",
+        desc: "You are strong, be proud of yourself 💗",
+        file: "songs/battlesymphony.mp3",
+        image: "images/battle.jpeg",
+        glow1: "rgba(255, 120, 80, 0.75)",
+        glow2: "rgba(255, 180, 120, 0.60)"
+    },
+    {
+        mood: "Missing Someone",
+        song: "Spring Day",
+        desc: "for the days when you miss someone 🌫️ ",
+        file: "songs/springday.mp3",
+        image: "images/springday.jpeg",
+        glow1: "rgba(160, 190, 255, 0.70)",
+        glow2: "rgba(210, 225, 255, 0.55)"
+    },
+    {
+        mood: "Days That Feel Low",
+        song: "Zero O’Clock",
+        desc: "A warm hug in the form of music🤍",
+        file: "songs/zero.mp3",
+        image: "images/zero.jpeg",
+        glow1: "rgba(100, 130, 200, 0.70)",
+        glow2: "rgba(170, 190, 255, 0.50)"
+    },
+    {
+        mood: "Comfort",
+        song: "Magic Shop",
+        desc: "always Here for You 🫶",
+        file: "songs/magicshop.mp3",
+        image: "images/comfort.jpeg",
+        glow1: "rgba(200, 150, 255, 0.70)",
+        glow2: "rgba(230, 200, 255, 0.55)"
+    },
+    {
+        mood: "Self Worth",
+        song: "Epiphany",
+        desc: "You are enough 🌸",
+        file: "songs/epiphany.mp3",
+        image: "images/epiphany.jpeg",
+        glow1: "rgba(255, 170, 100, 1)",
+        glow2: "rgba(255, 230, 180, 0.9)"
+    },
+    {
+        mood: "Late Night",
+        song: "Butterfly",
+        desc: "Soft and dreamy ✨",
+        file: "songs/Butterfly.mp3",
+        image: "images/latenight.jpeg",
+        glow1: "rgba(40, 60, 120, 0.80)",
+        glow2: "rgba(90, 130, 255, 0.65)"
+    }
+];
+
+let currentSong = 0;
+
+songPlayer.addEventListener("play", function(e){
+
+    if(!songPlayer.dataset.started){
+
+        e.preventDefault();
+        songPlayer.pause();
+
+        let fade = setInterval(()=>{
+
+            if(piano.volume > 0.02){
+                piano.volume -= 0.02;
+            }else{
+
+                piano.pause();
+                piano.currentTime = 0;
+
+                clearInterval(fade);
+
+                songPlayer.dataset.started = "true";
+
+                setTimeout(()=>{
+                    songPlayer.play();
+                },500);
+
+            }
+
+        },120);
+
+    }
+
+});
+
+openBtn.addEventListener("click", function() {
+    piano.play();
+    let fade = setInterval(()=>{
+    if(piano.volume < 0.35){
+        piano.volume += 0.01;
+    } else {
+        clearInterval(fade);
+    }
+    },150);
+
+    createConfetti();
+    intro.style.display = "none";
+    letter.classList.remove("hidden");
+ 
+
+    setTimeout(() => {
+        paper.classList.add("show");
+        typeText(greetingText, greetingEl, 70, () => {
+            typeText(messageText, messageEl, 50, () => {
+                typeText(signatureText, signatureEl, 70, () => {
+                    playlistBtn.style.display = "inline-block";
+                });
+            });
+        });
+    }, 300);
+});
+
+playlistBtn.addEventListener("click", function() {
+    magicLoader.classList.add("show");
+
+    setTimeout(() => {
+        magicLoader.classList.add("fade-out");
+
+        setTimeout(() => {
+            magicLoader.classList.remove("show", "fade-out");
+            playlistPage.style.transition = "opacity 1s ease";
+            playlistPage.classList.add("show");
+            updateSong();
+        }, 700);
+    }, 1500);
+});
+
+function updateSong() {
+    const songData = songs[currentSong];
+
+    playlistCard.classList.add("cinematic-out");
+
+    setTimeout(() => {
+        document.getElementById("mood").textContent = songData.mood;
+        document.getElementById("song").textContent = songData.song;
+        document.getElementById("desc").textContent = songData.desc;
+        document.getElementById("audio").src = songData.file;
+        albumImage.src = songData.image;
+
+        if (songData.glow1 && songData.glow2) {
+            albumImage.style.boxShadow = `
+                0 20px 45px ${songData.glow1},
+                0 0 70px ${songData.glow2},
+                0 0 120px ${songData.glow2}
+            `;
+        } else {
+            albumImage.style.boxShadow = "";
+        }
+
+        playlistCard.classList.remove("cinematic-out");
+        playlistCard.classList.add("cinematic-in");
+
+        setTimeout(() => {
+            playlistCard.classList.remove("cinematic-in");
+        }, 700);
+    }, 500);
+}
+
+document.querySelector(".leftNav").addEventListener("click", function () {
+    currentSong--;
+    if (currentSong < 0) currentSong = songs.length - 1;
+    updateSong();
+});
+
+document.querySelector(".rightNav").addEventListener("click", function () {
+    currentSong++;
+    if (currentSong >= songs.length) currentSong = 0;
+    updateSong();
+});
+
+function typeText(text, element, speed, callback) {
+    let i = 0;
+    function typing() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        } else if (callback) {
+            setTimeout(callback, 400);
+        }
+    }
+    typing();
+}
+
+function createConfetti() {
+    for (let i = 0; i < 40; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        document.body.appendChild(confetti);
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = `hsl(${Math.random()*360},70%,70%)`;
+        confetti.style.animationDuration = (Math.random()*2 + 2) + "s";
+        setTimeout(() => confetti.remove(), 3000);
+    }
+}
+/* ================= CLEAN FINAL PAGE LOGIC ================= */
+
+const finalPage = document.getElementById("finalPage");
+const playlistTitle = document.querySelector(".playlistTitle");
+const moonflower = document.getElementById("moonflower");
+const nameReveal = document.getElementById("nameReveal");
+const thesisText = document.getElementById("thesisText");
+const nightLoader = document.getElementById("nightLoader");
+const bloomSound = document.getElementById("bloomSound");
+bloomSound.volume = 0.35;
+const starSound = document.getElementById("starSound");
+starSound.volume = 0.4;
+
+/* Detect last song */
+function checkIfLastSong() {
+if (currentSong === songs.length - 1) {
+playlistTitle.innerHTML = 'One last thing... 💫 <span style="font-size:14px;opacity:.8;">(click here)</span>';
+playlistTitle.classList.add("finalHint");
+playlistTitle.style.cursor = "pointer";
+} else {
+playlistTitle.textContent = "A dedicated playlist just for you ✨";
+playlistTitle.classList.remove("finalHint");
+playlistTitle.style.cursor = "default";
+}
+}
+
+const originalUpdateSong = updateSong;
+updateSong = function() {
+originalUpdateSong();
+checkIfLastSong();
+};
+
+/* Smooth transition */
+
+playlistTitle.addEventListener("click", function(){
+
+if(currentSong === songs.length - 1){
+
+/* fade out piano before final scene */
+
+let fade = setInterval(()=>{
+
+if(piano.volume > 0.02){
+piano.volume -= 0.02;
+}else{
+piano.pause();
+piano.currentTime = 0;
+clearInterval(fade);
+}
+
+},80);
+
+nightLoader.classList.add("show");
+
+/* hide playlist and letter */
+playlistPage.style.display="none";
+document.querySelector(".card").style.display="none";
+
+setTimeout(()=>{
+
+nightLoader.classList.remove("show");
+finalPage.classList.add("show");
+resizeCanvas();
+
+
+setTimeout(()=>{
+moonflower.classList.remove("bloom");
+},500);
+
+},1800);
+
+}
+
+});
+/* Flower bloom reveal */
+
+let bloomFinished = false;
+
+moonflower.addEventListener("click",function(){
+
+if(!bloomFinished){
+bloomSound.currentTime = 0;
+bloomSound.play();
+
+moonflower.classList.add("bloom");
+document.querySelector(".stardustRipple").classList.add("animate");
+
+setTimeout(()=>{
+    document.querySelector(".bloomMessage").classList.add("show");
+},1100);
+
+
+bloomFinished=true;
+
+}else{
+
+    triggerEasterEgg();
+
+}
+
+});
+/* ================= ENHANCED STAR SKY ================= */
+
+const canvas = document.getElementById("starCanvas");
+const ctx = canvas.getContext("2d");
+
+let stars = [];
+let shootingStars = [];
+let constellationStars = [];
+let backgroundStarOpacity = 1;
+let sparkleIndex = -1;
+let sparkleTimer = 0;
+let dustOffset = 0;
+let constellationPulse = 0;
+
+
+function resizeCanvas(){
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+/* Create background stars */
+for(let i=0;i<350;i++){
+stars.push({
+x: Math.random()*canvas.width,
+y: Math.random()*canvas.height,
+
+targetX: null,
+targetY: null,
+
+r: Math.random()*1.6,
+alpha: Math.random(),
+speed: Math.random()*0.015,
+drift: (Math.random()-0.5)*0.05,
+depth: Math.random()*0.8 + 0.6,
+color: Math.random()<0.15 ? "200,220,255" : "255,255,255"
+});
+}
+
+/* Shooting star generator */
+function createShootingStar(){
+
+shootingStars.push({
+x: -50,                          // start off screen
+y: Math.random()*canvas.height*0.5,
+len: Math.random()*140+80,
+speed: Math.random()*4+3,        // slower
+life:0
+});
+
+
+}
+
+/* Occasionally create shooting star */
+setInterval(()=>{
+if(Math.random()<0.4){
+createShootingStar();
+}
+},4000);
+
+function drawStars(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+constellationPulse += 0.02;
+
+
+/* GALAXY DUST LAYER */
+dustOffset += 0.02;
+
+const dust = ctx.createRadialGradient(
+canvas.width*0.55 + Math.sin(dustOffset)*120,
+canvas.height*0.45,
+80,
+canvas.width*0.55,
+canvas.height*0.45,
+canvas.height*0.9
+);
+
+dust.addColorStop(0,"rgba(180,200,255,0.06)");
+dust.addColorStop(1,"rgba(0,0,40,0)");
+
+ctx.fillStyle = dust;
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+
+/* Draw normal stars */
+stars.forEach(star=>{
+
+star.alpha += star.speed;
+
+if(star.alpha > 1 || star.alpha < 0){
+star.speed *= -1;
+}
+
+if(star.targetX !== null){
+
+star.x += (star.targetX - star.x) * 0.008;
+star.y += (star.targetY - star.y) * 0.008;
+
+}
+else{
+
+star.x += star.drift * star.depth;
+}
+
+ctx.beginPath();
+ctx.arc(star.x, star.y, star.r * star.depth, 0, Math.PI*2);
+ctx.fillStyle = `rgba(${star.color},${star.alpha * backgroundStarOpacity})`;
+ctx.fill();
+
+});
+
+/* choose a random star to sparkle */
+sparkleTimer++;
+
+if(sparkleTimer > 180){
+sparkleTimer = 0;
+sparkleIndex = Math.floor(Math.random() * constellationStars.length);
+}
+
+/* draw constellation stars */
+constellationStars.forEach((s,i) => {
+
+if(s.targetX != null){
+
+s.x += (s.targetX - s.x) * 0.008;
+s.y += (s.targetY - s.y) * 0.008;
+
+if(s.alpha < 1){
+s.alpha += 0.02;
+}
+
+}
+
+/* TWINKLE */
+s.alpha += Math.sin(Date.now()*0.002 + s.x) * 0.002;
+
+ctx.beginPath();
+let twinkleSize = s.size + Math.sin(Date.now()*0.004 + s.x) * 0.7;
+
+if(i === sparkleIndex){
+twinkleSize *= 1.8;
+}
+ctx.arc(s.x, s.y, twinkleSize, 0, Math.PI*2);
+
+/* SOFT STAR GLOW */
+ctx.shadowBlur = (i === sparkleIndex) ? 28 : 12;
+ctx.shadowColor = "rgba(255,255,255,0.95)";
+
+const pulse = 0.9 + Math.sin(constellationPulse) * 0.1;
+ctx.fillStyle = "rgba(255,255,255," + (s.alpha * pulse) + ")";
+ctx.fill();
+
+ctx.shadowBlur = 0;
+});
+
+/* draw shooting stars */
+shootingStars.forEach((s,i)=>{
+
+/* star head */
+ctx.beginPath();
+ctx.arc(s.x, s.y, 2.8, 0, Math.PI*2);
+ctx.fillStyle="white";
+ctx.fill();
+
+/* trail directly behind motion */
+const trailX = s.x - s.speed*8;
+const trailY = s.y - s.speed*2;
+
+const gradient = ctx.createLinearGradient(
+s.x, s.y,
+trailX, trailY
+);
+
+gradient.addColorStop(0,"rgba(255,255,255,1)");
+gradient.addColorStop(1,"rgba(255,255,255,0)");
+
+ctx.beginPath();
+ctx.moveTo(s.x,s.y);
+ctx.lineTo(trailX,trailY);
+ctx.strokeStyle=gradient;
+ctx.lineWidth=2;
+ctx.stroke();
+
+/* movement */
+s.x += s.speed;
+s.y += s.speed*0.25;
+
+s.life++;
+
+if(s.life>160){
+shootingStars.splice(i,1);
+}
+
+});requestAnimationFrame(drawStars);
+
+}
+
+function generateNamePoints(text){
+
+const textCanvas = document.getElementById("textCanvas");
+const tctx = textCanvas.getContext("2d");
+
+textCanvas.width = canvas.width;
+textCanvas.height = canvas.height * 2;
+
+tctx.clearRect(0,0,textCanvas.width,textCanvas.height);
+
+tctx.fillStyle = "white";
+tctx.font = "bold 420px Serif";
+tctx.textAlign = "center";
+tctx.textBaseline = "middle";
+
+tctx.fillText(text, textCanvas.width/2, textCanvas.height*0.5);
+
+const imageData = tctx.getImageData(0,0,textCanvas.width,textCanvas.height);
+
+let points = [];
+
+for(let y=0;y<textCanvas.height;y+=3){
+for(let x=0;x<textCanvas.width;x+=3){
+
+const index = (y * textCanvas.width + x) * 4;
+const alpha = imageData.data[index+3];
+
+if(alpha > 128){
+points.push({x:x,y:y});
+}
+
+}
+}
+
+return points;
+
+}
+
+const constellationLetters = {
+A: [
+[0,1],[0.5,0],[1,1],
+[0.25,0.5],[0.75,0.5]
+],
+
+F: [
+[0,0],[0,1],
+[0,0],[0.8,0],
+[0,0.5],[0.6,0.5]
+],
+
+I: [
+[0.5,0],[0.5,1]
+],
+
+};
+
+function formStarName(name){
+
+const pattern = [
+
+/* A */
+[-420,-60],[-405,-100],[-390,-140],[-375,-180],
+[-360,-140],[-345,-100],[-330,-60],
+
+[-390,-100],[-360,-100],
+
+/* F */
+[-240,-180],[-240,-150],[-240,-120],[-240,-90],[-240,-60],
+[-220,-180],[-200,-180],[-180,-180],[-160,-180],
+[-220,-120],[-200,-120],[-180,-120],
+
+/* I */
+[-60,-180],[-40,-180],[-20,-180],
+[-40,-150],[-40,-120],[-40,-90],
+[-60,-60],[-40,-60],[-20,-60],
+
+/* F */
+[80,-180],[80,-150],[80,-120],[80,-90],[80,-60],
+[100,-180],[120,-180],[140,-180],[160,-180],
+[100,-120],[120,-120],[140,-120],
+
+/* A */
+[240,-60],[255,-100],[270,-140],[285,-180],
+[300,-140],[315,-100],[330,-60],
+
+[270,-100],[300,-100]
+];
+for(let i=0;i<constellationStars.length && i<pattern.length;i++){
+
+constellationStars[i].targetX = canvas.width/2 + pattern[i][0] + 40 ;
+constellationStars[i].targetY = canvas.height/2 + pattern[i][1] + 110;
+
+}
+
+}
+function triggerConstellation(){
+
+starSound.pause();
+starSound.currentTime = 0;
+
+const playPromise = starSound.play();
+
+if (playPromise !== undefined) {
+    playPromise.catch(() => {});
+}
+constellationStars = [];
+
+for(let i=0;i<80;i++){
+
+constellationStars.push({
+x: Math.random()*canvas.width,
+y: Math.random()*canvas.height,
+targetX: null,
+targetY: null,
+alpha: 0,
+size: 2,
+twinkle: Math.random()*Math.PI*2,
+twinkleSpeed: 0.02 + Math.random()*0.02
+});
+
+
+}
+
+
+moonflower.style.opacity = "0";
+moonflower.style.transition = "opacity 1.2s";
+
+document.querySelector(".bloomMessage").style.opacity = "0";
+document.querySelector(".bloomMessage").style.transition = "opacity 1.2s";
+
+let fadeInterval = setInterval(() => {
+
+backgroundStarOpacity -= 0.02;
+
+if(backgroundStarOpacity <= 0.15){
+backgroundStarOpacity = 0.15;
+clearInterval(fadeInterval);
+}
+
+}, 50);
+
+formStarName("AFIFA");
+
+
+}
+let clickCount = 0;
+let clickTimer;
+
+document.addEventListener("click", () => {
+
+clickCount++;
+
+clearTimeout(clickTimer);
+
+clickTimer = setTimeout(() => {
+clickCount = 0;
+}, 400);
+
+if(clickCount === 3){
+
+triggerConstellation();
+clickCount = 0;
+
+}
+
+});
+
+drawStars();
+
+/* SECRET KEYWORD EASTER EGG */
+
+let typed = "";
+
+document.addEventListener("keydown", function(e){
+
+typed += e.key.toLowerCase();
+
+if(typed.length > 9){
+typed = typed.slice(-9);
+}
+
+if(typed === "starshine"){
+
+triggerConstellation();
+
+typed = "";
+
+}
+
+});
+
+
+
+</script>
+
+
+</body>
+</html>
